@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR - Schedule Interview</title>
+    <link rel="stylesheet" href="hr.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eff4fc;
+        margin: 0;
+        padding: 60px 0 30px 0; 
+        position: relative;
+    }
+
+    .container {
+        width: 60%;
+        margin: 50px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="datetime-local"],
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; 
+    }
+
+    select {
+        height: 34px;
+    }
+
+    button {
+        background-color: #5cb85c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #4cae4c;
+    }
+
+    .employee-list {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .employee-list h2 {
+        margin-top: 0;
+        color: #555;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    .header {
+    background-color: white;
+    color: #344767;
+    height: 50px;
+    position: relative;
+    padding: 10px 20px; 
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 120px; 
+    margin-right: 15px;
+}
+.header-center {
+    flex-grow: 1;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav a {
+    color: #192944;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.nav a:hover {
+    background-color: #e4efff;
+}
+.logout-btn {
+    background-color:  #e94e31;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 0px 40px;
+}
+
+.logout-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: #777;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        width: 90%;
+    }
+    
+    .logo {
+        height: 80px;
+    }
+    
+    .logout-btn {
+        margin: 0px 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 120px;
+    }
+    
+    .header {
+        height: auto;
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .header-left {
+        margin-bottom: 10px;
+    }
+    
+    .header-center {
+        width: 100%;
+    }
+    
+    .nav {
+        flex-wrap: wrap;
+    }
+    
+    .nav a {
+        margin: 5px;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+    
+    .logout-btn {
+        margin: 10px 0;
+    }
+    
+    .logo {
+        height: 60px;
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .employee-list {
+        overflow-x: auto;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 6px;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding-top: 150px;
+    }
+    
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav a {
+        width: 80%;
+        text-align: center;
+        margin: 3px 0;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
+        </div>
+        <div class="header-center">
+            <div class="nav">
+                <a href="schedule.html">Schedule Interview</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="record.html">Evaluation Records</a>
+            </div>
+        </div>
+        <button class="logout-btn"><a href="../index.html">Logout</a></button>
+    </div>
+    <div class="container">
+        <h1>Schedule Interview</h1>
+
+        <label for="intervieweeName">Interviewee Name:</label>
+        <input type="text" id="intervieweeName" name="intervieweeName" required>
+
+        <label for="intervieweeEmail">Interviewee Email:</label>
+        <input type="email" id="intervieweeEmail" name="intervieweeEmail" required>
+
+        <label for="intervieweeQualification">Interviewee Qualification:</label>
+        <input type="text" id="intervieweeQualification" name="intervieweeQualification" required>
+
+        <label for="intervieweeResume">Interviewee Resume (URL):</label>
+        <input type="text" id="intervieweeResume" name="intervieweeResume" placeholder="Enter URL or filename" required>
+
+        <label for="interviewer">Interviewer:</label>
+        <select id="interviewer" name="interviewer" required>
+            <option value="">Select Interviewer</option>
+            <option value="interviewer1@company.com">Interviewer 1</option>
+            <option value="interviewer2@company.com">Interviewer 2</option>
+            <!-- Dynamically populate from database -->
+        </select>
+
+        <label for="interviewDateTime">Interview Date & Time:</label>
+        <input type="datetime-local" id="interviewDateTime" name="interviewDateTime" required>
+
+        <button onclick="scheduleInterview()">Schedule Interview</button>
+
+        <div class="employee-list">
+            <h2>Interviewee List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Qualification</th>
+                        <th>Resume</th>
+                    </tr>
+                </thead>
+                <tbody id="intervieweeTableBody">
+                    <!-- Data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function scheduleInterview() {
+            const intervieweeName = document.getElementById('intervieweeName').value;
+            const intervieweeEmail = document.getElementById('intervieweeEmail').value;
+            const intervieweeQualification = document.getElementById('intervieweeQualification').value;
+            const intervieweeResume = document.getElementById('intervieweeResume').value;
+            const interviewer = document.getElementById('interviewer').value;
+            const interviewDateTime = document.getElementById('interviewDateTime').value;
+
+            // Basic Validation
+            if (!intervieweeName || !intervieweeEmail || !intervieweeQualification || !intervieweeResume || !interviewer || !interviewDateTime) {
+                alert('Please fill in all the fields.');
+                return;
+            }
+
+            // Here you would normally send the data to your backend (Java/Spring Boot)
+            // For this example, we'll just log it to the console and update the table
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${intervieweeName}</td>
+                <td>${intervieweeEmail}</td>
+                <td>${intervieweeQualification}</td>
+                <td><a href="${intervieweeResume}" target="_blank">View Resume</a></td>
+            `;
+
+            document.getElementById('intervieweeTableBody').appendChild(newRow);
+
+            console.log('Interview Scheduled:', {
+                intervieweeName,
+                intervieweeEmail,
+                intervieweeQualification,
+                intervieweeResume,
+                interviewer,
+                interviewDateTime
+            });
+
+            // **Backend Integration Point:**
+            // 1. Send the interview data to your backend to store in the database.
+            // 2.  Backend generates the email notification
+            // 3.  Backend sends the email to the interviewer.
+
+            // Placeholder for email sending (replace with backend integration):
+            alert(`Interview scheduled for ${intervieweeName} with ${interviewer} on ${interviewDateTime}.  Email notification would be sent here.`);
+
+            // Clear the form
+            document.getElementById('intervieweeName').value = '';
+            document.getElementById('intervieweeEmail').value = '';
+            document.getElementById('intervieweeQualification').value = '';
+            document.getElementById('intervieweeResume').value = '';
+            document.getElementById('interviewer').selectedIndex = 0; // Reset to default option
+            document.getElementById('interviewDateTime').value = '';
+        }
+
+    </script>
+</body>
+</html>

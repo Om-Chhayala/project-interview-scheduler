@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hr.css">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #eff4fc;
+          margin: 0;
+          padding: 60px 0 30px 0;
+          position: relative;
+        }
+
+        .container {
+          width: 80%;
+          margin: 60px auto;
+          background: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+          text-align: center;
+          color: #333;
+        }
+
+        .scheduled-interviews {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+
+        .scheduled-interviews th,
+        .scheduled-interviews td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+
+        .scheduled-interviews th {
+          background-color: #f0f0f0;
+        }
+
+        .no-interviews {
+          text-align: center;
+          font-style: italic;
+          color: #bae6f9;
+          margin-top: 20px;
+        }
+        
+        .header {
+            background-color: white;
+            color: #344767;
+            height: 50px;
+            position: relative;
+            padding: 10px 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 120px; 
+            margin-right: 15px;
+        }
+        
+        .header-center {
+            flex-grow: 1;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .nav a {
+            color: #192944;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .nav a:hover {
+            background-color: #e4efff;
+        }
+
+        .logout-btn {
+            background-color: #e94e31;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin: 0px 40px;
+        }
+
+        .logout-btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #777;
+        }
+        
+        /* Media Queries for Responsive Design */
+        
+        /* Large devices (desktops, less than 1200px) */
+        @media (max-width: 1199.98px) {
+            .container {
+                width: 90%;
+            }
+            
+            .logo {
+                height: 100px;
+            }
+        }
+        
+        /* Medium devices (tablets, less than 992px) */
+        @media (max-width: 991.98px) {
+            .container {
+                width: 95%;
+                margin: 80px auto 30px;
+            }
+            
+            .logo {
+                height: 80px;
+            }
+            
+            .nav a {
+                padding: 8px 15px;
+                margin: 0 3px;
+                font-size: 14px;
+            }
+            
+            .logout-btn {
+                margin: 0px 20px;
+            }
+        }
+        
+        /* Small devices (landscape phones, less than 768px) */
+        @media (max-width: 767.98px) {
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            
+            .header-left {
+                margin-bottom: 10px;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+            
+            .nav {
+                flex-wrap: wrap;
+            }
+            
+            .nav a {
+                margin: 5px;
+            }
+            
+            .logout-btn {
+                margin: 10px 0;
+            }
+            
+            .container {
+                margin-top: 150px;
+                padding: 15px;
+            }
+            
+            /* Make table scrollable horizontally */
+            .scheduled-interviews {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            body {
+                padding-top: 120px;
+            }
+        }
+        
+        /* Extra small devices (phones, less than 576px) */
+        @media (max-width: 575.98px) {
+            .container {
+                width: 100%;
+                margin-top: 170px;
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav a {
+                width: 100%;
+                text-align: center;
+                margin: 3px 0;
+            }
+            
+            body {
+                padding-top: 150px;
+            }
+            
+            .scheduled-interviews th,
+            .scheduled-interviews td {
+                padding: 6px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
+        </div>
+        <div class="header-center">
+            <div class="nav">
+                <a href="schedule.html">Schedule Interview</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="record.html">Evaluation Records</a>
+            </div>
+        </div>
+        <button class="logout-btn"><a href="../index.html">Logout</a></button>
+    </div>
+    <div class="container">
+        <h1>Scheduled Interviews</h1>
+
+        <table class="scheduled-interviews" id="interviewTable">
+            <thead>
+                <tr>
+                    <th>Interviewee Name</th>
+                    <th>Interviewee Email</th>
+                    <th>Interviewer</th>
+                    <th>Date & Time</th>
+                    <th>Resume</th>
+                </tr>
+            </thead>
+            <tbody id="interviewBody">
+                <!-- Scheduled interviews will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <p id="noInterviewsMessage" class="no-interviews" style="display:none;">No interviews scheduled.</p>
+    </div>
+    <script>
+        function loadScheduledInterviews() {
+            // Mock Data - Replace with actual data fetched from the backend
+            const scheduledInterviews = [
+                {
+                    intervieweeName: 'John Doe',
+                    intervieweeEmail: 'john.doe@example.com',
+                    interviewer: 'interviewer1@company.com',
+                    dateTime: '2024-01-25 10:00',
+                    resume: 'john_doe_resume.pdf'
+                },
+                {
+                    intervieweeName: 'Jane Smith',
+                    intervieweeEmail: 'jane.smith@example.com',
+                    interviewer: 'interviewer2@company.com',
+                    dateTime: '2024-01-26 14:00',
+                    resume: 'jane_smith_resume.pdf'
+                }
+            ];
+
+            const interviewBody = document.getElementById('interviewBody');
+            const noInterviewsMessage = document.getElementById('noInterviewsMessage');
+
+            // Clear existing interviews
+            interviewBody.innerHTML = '';
+
+            if (scheduledInterviews.length === 0) {
+                noInterviewsMessage.style.display = 'block';
+                document.getElementById('interviewTable').style.display = 'none'; // Hide table if no data
+            } else {
+                noInterviewsMessage.style.display = 'none';
+                document.getElementById('interviewTable').style.display = 'table'; // Show table
+
+                scheduledInterviews.forEach(interview => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${interview.intervieweeName}</td>
+                        <td>${interview.intervieweeEmail}</td>
+                        <td>${interview.interviewer}</td>
+                        <td>${interview.dateTime}</td>
+                        <td><a href="${interview.resume}" target="_blank">View</a></td>
+                    `;
+                    interviewBody.appendChild(row);
+                });
+            }
+        }
+
+        // Load scheduled interviews on page load
+        loadScheduledInterviews();
+    </script>
+</body>
+</html>

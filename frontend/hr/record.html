@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR - Evaluation Records</title>
+    <link rel="stylesheet" href="hr.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eff4fc;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 80%;
+        margin: 100px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .record-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .record-table th, .record-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .record-table th {
+        background-color: #f0f0f0;
+    }
+
+    .record-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .record-table a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .record-table a:hover {
+        text-decoration: underline;
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .button-container button {
+        background-color: #5cb85c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+
+    .button-container button:hover {
+        background-color: #4cae4c;
+    }
+    .no-records {
+        text-align: center;
+        font-style: italic;
+        color: #888;
+        margin-top: 20px;
+    }
+    .header {
+    background-color: white;
+    color: #344767;
+    height: 50px;
+    position: relative;
+    padding: 10px 20px; 
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 120px; 
+    margin-right: 15px;
+}
+.header-center {
+    flex-grow: 1;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav a {
+    color: #192944;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.nav a:hover {
+    background-color: #e4efff;
+}
+.logout-btn {
+    background-color:  #e94e31;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 0px 40px;
+}
+
+.logout-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: #777;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #192944;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+    
+    .logo {
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        height: auto;
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        height: 80px;
+    }
+    
+    .header-center {
+        width: 100%;
+    }
+    
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav a {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .container {
+        width: 95%;
+        margin-top: 150px;
+        padding: 15px;
+    }
+    
+    .logout-btn {
+        margin: 10px 0;
+    }
+    
+    /* Mobile-friendly table */
+    .record-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .button-container button {
+        padding: 8px 15px;
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        margin-top: 180px;
+        width: 100%;
+        border-radius: 0;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .nav.active {
+        display: flex;
+    }
+    
+    .header-center {
+        order: 3;
+    }
+    
+    .logout-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .button-container button {
+        width: 80%;
+        margin: 5px 0;
+    }
+    
+    /* Stack table on mobile */
+    .record-table thead {
+        display: none;
+    }
+    
+    .record-table, .record-table tbody, .record-table tr, .record-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .record-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+    }
+    
+    .record-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .record-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="header-center">
+            <div class="nav" id="navMenu">
+                <a href="schedule.html">Schedule Interview</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="record.html">Evaluation Records</a>
+            </div>
+        </div>
+        <button class="logout-btn"><a href="../index.html">Logout</a></button>
+    </div>
+    <div class="container">
+        <h1>Evaluation Records</h1>
+
+        <table class="record-table">
+            <thead>
+                <tr>
+                    <th>Interviewee Name</th>
+                    <th>Interview Date</th>
+                    <th>Interviewer</th>
+                    <th>L1 Decision</th>
+                    <th>L2 Scheduled</th>
+                    <th>View PDF</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="recordTableBody">
+                <!-- Records will be dynamically populated here -->
+            </tbody>
+        </table>
+
+        <div id="noRecordsMessage" class="no-records" style="display:none;">No records found.</div>
+
+        <div class="button-container">
+            <button onclick="loadRecords()">Load Records</button>
+        </div>
+    </div>
+    <script>
+        function loadRecords() {
+            // Mock Data - Replace with actual data from your backend
+            const records = [
+                {
+                    intervieweeName: 'John Doe',
+                    interviewDate: '2024-01-20',
+                    interviewer: 'interviewer1@company.com',
+                    l1Decision: 'L1 Passed',
+                    l2Scheduled: false,
+                    pdfUrl: 'evaluation_john_doe.pdf'
+                },
+                {
+                    intervieweeName: 'Jane Smith',
+                    interviewDate: '2024-01-21',
+                    interviewer: 'interviewer2@company.com',
+                    l1Decision: 'L1 Passed with Comment',
+                    l2Scheduled: true,
+                    pdfUrl: 'evaluation_jane_smith.pdf'
+                }
+            ];
+
+            const tableBody = document.getElementById('recordTableBody');
+            const noRecordsMessage = document.getElementById('noRecordsMessage');
+
+            // Clear existing records
+            tableBody.innerHTML = '';
+
+            if (records.length === 0) {
+                noRecordsMessage.style.display = 'block';
+            } else {
+                noRecordsMessage.style.display = 'none';
+
+                records.forEach(record => {
+                    const row = document.createElement('tr');
+                    
+                    // Check if we're in mobile view to add data-labels
+                    if (window.innerWidth <= 480) {
+                        row.innerHTML = `
+                            <td data-label="Interviewee Name">${record.intervieweeName}</td>
+                            <td data-label="Interview Date">${record.interviewDate}</td>
+                            <td data-label="Interviewer">${record.interviewer}</td>
+                            <td data-label="L1 Decision">${record.l1Decision}</td>
+                            <td data-label="L2 Scheduled">${record.l2Scheduled ? 'Yes' : 'No'}</td>
+                            <td data-label="View PDF"><a href="${record.pdfUrl}" target="_blank">View</a></td>
+                            <td data-label="Actions">
+                                <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
+                                ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
+                                    `<button onclick="scheduleL2('${record.intervieweeName}')">Schedule L2</button>` : ''}
+                            </td>
+                        `;
+                    } else {
+                        row.innerHTML = `
+                            <td>${record.intervieweeName}</td>
+                            <td>${record.interviewDate}</td>
+                            <td>${record.interviewer}</td>
+                            <td>${record.l1Decision}</td>
+                            <td>${record.l2Scheduled ? 'Yes' : 'No'}</td>
+                            <td><a href="${record.pdfUrl}" target="_blank">View</a></td>
+                            <td>
+                                <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
+                                ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
+                                    `<button onclick="scheduleL2('${record.intervieweeName}')">Schedule L2</button>` : ''}
+                            </td>
+                        `;
+                    }
+                    
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+
+        function deleteRecord(intervieweeName) {
+            // **Backend Integration Point:** Send the delete request to your backend.
+            //Implement your delete logic here (send request to backend)
+            alert(`Deleting record for ${intervieweeName}`);
+        }
+
+        function scheduleL2(intervieweeName) {
+            // Implement your L2 scheduling logic here (redirect to scheduling page or show a modal)
+            // **Backend Integration Point:**  Ideally, redirect to the scheduling page,
+            // pre-filled with the interviewee's data.
+            window.location.href = `schedule.html?intervieweeName=${intervieweeName}`;
+            //alert(`Scheduling L2 for ${intervieweeName}`);
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Reload records if table structure needs to change
+            if (document.getElementById('recordTableBody').children.length > 0) {
+                loadRecords();
+            }
+        });
+
+        // Load records on page load (optional)
+        // loadRecords();
+    </script>
+</body>
+</html>

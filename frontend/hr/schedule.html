@@ -286,19 +286,22 @@
         <label for="intervieweeEmail">Interviewee Email:</label>
         <input type="email" id="intervieweeEmail" name="intervieweeEmail" required>
 
-        <label for="intervieweeQualification">Interviewee Qualification:</label>
-        <input type="text" id="intervieweeQualification" name="intervieweeQualification" required>
-
         <label for="intervieweeResume">Interviewee Resume (URL):</label>
-        <input type="text" id="intervieweeResume" name="intervieweeResume" placeholder="Enter URL or filename" required>
+        <input type="text" id="intervieweeResume" name="intervieweeResume" placeholder="Enter URL" required>
+
+        <label for="interviewRound">Interview Round:</label>
+        <select id="level" name="level" required>
+            <option value="">Select Interview Round</option>
+            <option value="level1">L1</option>>
+            <option value="level2">L2</option>>
+        </select>
 
         <label for="interviewer">Interviewer:</label>
         <select id="interviewer" name="interviewer" required>
             <option value="">Select Interviewer</option>
-            <option value="interviewer1@company.com">Interviewer 1</option>
-            <option value="interviewer2@company.com">Interviewer 2</option>
-            <!-- Dynamically populate from database -->
+            <option value="interviewer1@company.com">John Doe</option>>
         </select>
+
 
         <label for="interviewDateTime">Interview Date & Time:</label>
         <input type="datetime-local" id="interviewDateTime" name="interviewDateTime" required>
@@ -312,7 +315,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Qualification</th>
                         <th>Resume</th>
                     </tr>
                 </thead>
@@ -323,58 +325,87 @@
         </div>
     </div>
     <script>
-        function scheduleInterview() {
-            const intervieweeName = document.getElementById('intervieweeName').value;
-            const intervieweeEmail = document.getElementById('intervieweeEmail').value;
-            const intervieweeQualification = document.getElementById('intervieweeQualification').value;
-            const intervieweeResume = document.getElementById('intervieweeResume').value;
-            const interviewer = document.getElementById('interviewer').value;
-            const interviewDateTime = document.getElementById('interviewDateTime').value;
-
-            // Basic Validation
-            if (!intervieweeName || !intervieweeEmail || !intervieweeQualification || !intervieweeResume || !interviewer || !interviewDateTime) {
-                alert('Please fill in all the fields.');
-                return;
-            }
-
-            // Here you would normally send the data to your backend (Java/Spring Boot)
-            // For this example, we'll just log it to the console and update the table
-
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${intervieweeName}</td>
-                <td>${intervieweeEmail}</td>
-                <td>${intervieweeQualification}</td>
-                <td><a href="${intervieweeResume}" target="_blank">View Resume</a></td>
-            `;
-
-            document.getElementById('intervieweeTableBody').appendChild(newRow);
-
-            console.log('Interview Scheduled:', {
-                intervieweeName,
-                intervieweeEmail,
-                intervieweeQualification,
-                intervieweeResume,
-                interviewer,
-                interviewDateTime
-            });
-
-            // **Backend Integration Point:**
-            // 1. Send the interview data to your backend to store in the database.
-            // 2.  Backend generates the email notification
-            // 3.  Backend sends the email to the interviewer.
-
-            // Placeholder for email sending (replace with backend integration):
-            alert(`Interview scheduled for ${intervieweeName} with ${interviewer} on ${interviewDateTime}.  Email notification would be sent here.`);
-
-            // Clear the form
-            document.getElementById('intervieweeName').value = '';
-            document.getElementById('intervieweeEmail').value = '';
-            document.getElementById('intervieweeQualification').value = '';
-            document.getElementById('intervieweeResume').value = '';
-            document.getElementById('interviewer').selectedIndex = 0; // Reset to default option
-            document.getElementById('interviewDateTime').value = '';
+        // Function to fetch interviewers and populate the dropdown
+        function populateInterviewers() {
+            fetch('/api/interviewers') // Replace with your actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(interviewers => {
+                    const interviewerSelect = document.getElementById('interviewer');
+                    interviewers.forEach(interviewer => {
+                        const option = document.createElement('option');
+                        option.value = interviewer;  // Use email as value
+                        option.textContent = interviewer; // Display interviewer's name or email
+                        interviewerSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching interviewers:', error));
         }
+
+        function scheduleInterview() {
+    const intervieweeName = document.getElementById('intervieweeName').value;
+    const intervieweeEmail = document.getElementById('intervieweeEmail').value;
+    const intervieweeResume = document.getElementById('intervieweeResume').value;
+    const interviewer = document.getElementById('interviewer').value; // Interviewer's email
+    const interviewDateTime = document.getElementById('interviewDateTime').value;
+
+    // Basic Validation
+    if (!intervieweeName || !intervieweeEmail || !intervieweeResume || !interviewer || !interviewDateTime) {
+        alert('Please fill in all the fields.');
+        return;
+    }
+
+    const scheduleData = {
+        interviewerName: interviewer, 
+        intervieweeName: intervieweeName,
+        email: intervieweeEmail,
+        resumeLink: intervieweeResume,
+        interviewDate: interviewDateTime
+    };
+
+    fetch('/api/schedules', { // Replace with actual API endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(scheduleData) // Ensure JSON format
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+
+        // Update the table dynamically
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${intervieweeName}</td>
+            <td>${intervieweeEmail}</td>
+            <td><a href="${intervieweeResume}" target="_blank">View Resume</a></td>
+        `;
+        document.getElementById('intervieweeTableBody').appendChild(newRow);
+
+        // Success message
+        alert('Interview scheduled successfully!');
+
+        // Clear form fields
+        document.getElementById('intervieweeName').value = '';
+        document.getElementById('intervieweeEmail').value = '';
+        document.getElementById('intervieweeResume').value = '';
+        document.getElementById('interviewer').selectedIndex = 0;
+        document.getElementById('interviewDateTime').value = '';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while scheduling the interview. Please try again.');
+    });
+}
+
+
+        // Call populateInterviewers when the page loads
+        window.onload = populateInterviewers;
 
     </script>
 </body>

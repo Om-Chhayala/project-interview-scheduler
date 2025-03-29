@@ -323,6 +323,7 @@
                     <th>Interviewer</th>
                     <th>L1 Decision</th>
                     <th>L2 Scheduled</th>
+                    <th>Final Decision</th>
                     <th>View PDF</th>
                     <th>Actions</th>
                 </tr>
@@ -340,7 +341,7 @@
     </div>
     <script>
         function loadRecords() {
-            // Mock Data - Replace with actual data from your backend
+            // Mock Data - Updated to include L2 decision and logic for final decision
             const records = [
                 {
                     intervieweeName: 'John Doe',
@@ -348,7 +349,8 @@
                     interviewer: 'interviewer1@company.com',
                     l1Decision: 'L1 Passed',
                     l2Scheduled: false,
-                    pdfUrl: 'evaluation_john_doe.pdf'
+                    l2Decision: null,
+                    finalDecision: 'Selected'
                 },
                 {
                     intervieweeName: 'Jane Smith',
@@ -356,7 +358,17 @@
                     interviewer: 'interviewer2@company.com',
                     l1Decision: 'L1 Passed with Comment',
                     l2Scheduled: true,
-                    pdfUrl: 'evaluation_jane_smith.pdf'
+                    l2Decision: 'L2 Passed',
+                    finalDecision: 'Selected'
+                },
+                {
+                    intervieweeName: 'Mike Johnson',
+                    interviewDate: '2024-01-22',
+                    interviewer: 'interviewer3@company.com',
+                    l1Decision: 'L1 Passed with Comment',
+                    l2Scheduled: true,
+                    l2Decision: 'L2 Passed with Comment',
+                    finalDecision: 'Not Selected'
                 }
             ];
 
@@ -382,7 +394,8 @@
                             <td data-label="Interviewer">${record.interviewer}</td>
                             <td data-label="L1 Decision">${record.l1Decision}</td>
                             <td data-label="L2 Scheduled">${record.l2Scheduled ? 'Yes' : 'No'}</td>
-                            <td data-label="View PDF"><a href="${record.pdfUrl}" target="_blank">View</a></td>
+                            <td data-label="Final Decision">${record.finalDecision}</td>
+                            <td data-label="View PDF"><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
                             <td data-label="Actions">
                                 <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
                                 ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
@@ -396,7 +409,8 @@
                             <td>${record.interviewer}</td>
                             <td>${record.l1Decision}</td>
                             <td>${record.l2Scheduled ? 'Yes' : 'No'}</td>
-                            <td><a href="${record.pdfUrl}" target="_blank">View</a></td>
+                            <td>${record.finalDecision}</td>
+                            <td><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
                             <td>
                                 <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
                                 ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
@@ -421,7 +435,6 @@
             // **Backend Integration Point:**  Ideally, redirect to the scheduling page,
             // pre-filled with the interviewee's data.
             window.location.href = `schedule.html?intervieweeName=${intervieweeName}`;
-            //alert(`Scheduling L2 for ${intervieweeName}`);
         }
 
         // Toggle mobile menu
@@ -437,9 +450,6 @@
                 loadRecords();
             }
         });
-
-        // Load records on page load (optional)
-        // loadRecords();
     </script>
 </body>
 </html>

@@ -285,13 +285,15 @@
                     intervieweeName: 'John Doe',
                     interviewDate: '2024-01-25 10:00',
                     intervieweeEmail: 'john.doe@example.com',
-                    intervieweeResume: 'john_doe_resume.pdf'
+                    intervieweeResume: 'john_doe_resume.pdf',
+                    interviewRound: 'L1' // Added interview round
                 },
                 {
                     intervieweeName: 'Jane Smith',
                     interviewDate: '2024-01-26 14:00',
                     intervieweeEmail: 'jane.smith@example.com',
-                    intervieweeResume: 'jane_smith_resume.pdf'
+                    intervieweeResume: 'jane_smith_resume.pdf',
+                    interviewRound: 'L1' // Added interview round
                 }
             ];
 
@@ -313,8 +315,9 @@
                         <h2>${interview.intervieweeName}</h2>
                         <p><strong>Date/Time:</strong> ${interview.interviewDate}</p>
                         <p><strong>Email:</strong> ${interview.intervieweeEmail}</p>
+                        <p><strong>Interview Round:</strong> ${interview.interviewRound}</p>
                         <p><a href="${interview.intervieweeResume}" target="_blank">View Resume</a></p>
-                        <a href="evaluation.html?name=${interview.intervieweeName}&email=${interview.intervieweeEmail}&date=${interview.interviewDate}" class="evaluate-button">Evaluate</a>
+                        <a href="evaluation.html?name=${interview.intervieweeName}&email=${interview.intervieweeEmail}&date=${interview.interviewDate}&round=${interview.interviewRound}" class="evaluate-button">Evaluate</a>
                     `;
                     interviewList.appendChild(interviewCard);
                 });

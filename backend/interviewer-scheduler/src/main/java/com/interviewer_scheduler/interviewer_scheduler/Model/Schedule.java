@@ -4,22 +4,34 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "schedule")
 public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String typeOfInterview;
+
+    @Column(nullable = false)
     private String interviewerName;
+
+    @Column(nullable = false)
     private String intervieweeName;
+
+    @Column(nullable = false)
     private String email;
+
     private String resumeLink;
+
+    @Column(nullable = false)
     private LocalDateTime interviewDate;
 
-    public Schedule() {
-    }
+    public Schedule() {}
 
-    public Schedule(String interviewerName, String intervieweeName, String email, String resumeLink, LocalDateTime interviewDate) {
+    public Schedule(String typeOfInterview, String interviewerName, String intervieweeName, String email, String resumeLink, LocalDateTime interviewDate) {
+        this.typeOfInterview = typeOfInterview;
         this.interviewerName = interviewerName;
         this.intervieweeName = intervieweeName;
         this.email = email;
@@ -27,52 +39,24 @@ public class Schedule {
         this.interviewDate = interviewDate;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getTypeOfInterview() { return typeOfInterview; }
+    public void setTypeOfInterview(String typeOfInterview) { this.typeOfInterview = typeOfInterview; }
 
-    public String getInterviewerName() {
-        return interviewerName;
-    }
+    public String getInterviewerName() { return interviewerName; }
+    public void setInterviewerName(String interviewerName) { this.interviewerName = interviewerName; }
 
-    public void setInterviewerName(String interviewerName) {
-        this.interviewerName = interviewerName;
-    }
+    public String getIntervieweeName() { return intervieweeName; }
+    public void setIntervieweeName(String intervieweeName) { this.intervieweeName = intervieweeName; }
 
-    public String getIntervieweeName() {
-        return intervieweeName;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setIntervieweeName(String intervieweeName) {
-        this.intervieweeName = intervieweeName;
-    }
+    public String getResumeLink() { return resumeLink; }
+    public void setResumeLink(String resumeLink) { this.resumeLink = resumeLink; }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getResumeLink() {
-        return resumeLink;
-    }
-
-    public void setResumeLink(String resumeLink) {
-        this.resumeLink = resumeLink;
-    }
-
-    public LocalDateTime getInterviewDate() {
-        return interviewDate;
-    }
-
-    public void setInterviewDate(LocalDateTime interviewDate) {
-        this.interviewDate = interviewDate;
-    }
+    public LocalDateTime getInterviewDate() { return interviewDate; }
+    public void setInterviewDate(LocalDateTime interviewDate) { this.interviewDate = interviewDate; }
 }
-

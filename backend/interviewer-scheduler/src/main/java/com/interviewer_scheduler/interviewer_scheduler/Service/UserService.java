@@ -6,6 +6,7 @@ import com.interviewer_scheduler.interviewer_scheduler.Repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +31,10 @@ public class UserService {
             return "Login successful!";
         }
         return "Invalid credentials!";
+    }
+
+    public List<User> getInterviewers() {
+        return userRepository.findByRole("interviewer");
     }
 }
 

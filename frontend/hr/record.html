@@ -297,24 +297,23 @@
 }
     </style>
 </head>
-<body>
-    <div class="header">
-        <div class="header-left">
-            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        </div>
-        <div class="header-center">
-            <div class="nav" id="navMenu">
-                <a href="schedule.html">Schedule Interview</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="record.html">Evaluation Records</a>
-            </div>
-        </div>
-        <button class="logout-btn"><a href="../index.html">Logout</a></button>
+<div class="header">
+    <div class="header-left">
+        <img src="/images/logoimage.png" alt="Company Logo" class="logo">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     </div>
+    <div class="header-center">
+        <div class="nav" id="navMenu">
+            <a href="schedule.html">Schedule Interview</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="record.html">Evaluation Records</a>
+        </div>
+    </div>
+    <button class="logout-btn"><a href="../index.html">Logout</a></button>
+</div>
+<body>
     <div class="container">
         <h1>Evaluation Records</h1>
-
         <table class="record-table">
             <thead>
                 <tr>
@@ -328,128 +327,87 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody id="recordTableBody">
-                <!-- Records will be dynamically populated here -->
-            </tbody>
+            <tbody id="recordTableBody"></tbody>
         </table>
-
         <div id="noRecordsMessage" class="no-records" style="display:none;">No records found.</div>
-
         <div class="button-container">
             <button onclick="loadRecords()">Load Records</button>
         </div>
     </div>
     <script>
-        function loadRecords() {
-            // Mock Data - Updated to include L2 decision and logic for final decision
-            const records = [
-                {
-                    intervieweeName: 'John Doe',
-                    interviewDate: '2024-01-20',
-                    interviewer: 'interviewer1@company.com',
-                    l1Decision: 'L1 Passed',
-                    l2Scheduled: false,
-                    l2Decision: null,
-                    finalDecision: 'Selected'
-                },
-                {
-                    intervieweeName: 'Jane Smith',
-                    interviewDate: '2024-01-21',
-                    interviewer: 'interviewer2@company.com',
-                    l1Decision: 'L1 Passed with Comment',
-                    l2Scheduled: true,
-                    l2Decision: 'L2 Passed',
-                    finalDecision: 'Selected'
-                },
-                {
-                    intervieweeName: 'Mike Johnson',
-                    interviewDate: '2024-01-22',
-                    interviewer: 'interviewer3@company.com',
-                    l1Decision: 'L1 Passed with Comment',
-                    l2Scheduled: true,
-                    l2Decision: 'L2 Passed with Comment',
-                    finalDecision: 'Not Selected'
+        async function deleteRecord(id) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/evaluations/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('Record deleted successfully');
+                    loadRecords();
+                } else {
+                    alert('Error deleting record');
                 }
-            ];
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-            const tableBody = document.getElementById('recordTableBody');
-            const noRecordsMessage = document.getElementById('noRecordsMessage');
+        async function updateFinalDecision(id, newDecision) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/evaluations/${id}/final-decision?finalDecision=${newDecision}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                if (response.ok) {
+                    alert('Final decision updated successfully');
+                    loadRecords();
+                } else {
+                    alert('Error updating decision');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-            // Clear existing records
-            tableBody.innerHTML = '';
-
-            if (records.length === 0) {
-                noRecordsMessage.style.display = 'block';
-            } else {
+        async function loadRecords() {
+            try {
+                const response = await fetch('http://localhost:8080/api/evaluations');
+                const records = await response.json();
+                const tableBody = document.getElementById('recordTableBody');
+                const noRecordsMessage = document.getElementById('noRecordsMessage');
+                
+                tableBody.innerHTML = '';
+                if (records.length === 0) {
+                    noRecordsMessage.style.display = 'block';
+                    return;
+                }
                 noRecordsMessage.style.display = 'none';
-
+    
                 records.forEach(record => {
                     const row = document.createElement('tr');
-                    
-                    // Check if we're in mobile view to add data-labels
-                    if (window.innerWidth <= 480) {
-                        row.innerHTML = `
-                            <td data-label="Interviewee Name">${record.intervieweeName}</td>
-                            <td data-label="Interview Date">${record.interviewDate}</td>
-                            <td data-label="Interviewer">${record.interviewer}</td>
-                            <td data-label="L1 Decision">${record.l1Decision}</td>
-                            <td data-label="L2 Scheduled">${record.l2Scheduled ? 'Yes' : 'No'}</td>
-                            <td data-label="Final Decision">${record.finalDecision}</td>
-                            <td data-label="View PDF"><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
-                            <td data-label="Actions">
-                                <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
-                                ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
-                                    `<button onclick="scheduleL2('${record.intervieweeName}')">Schedule L2</button>` : ''}
-                            </td>
-                        `;
-                    } else {
-                        row.innerHTML = `
-                            <td>${record.intervieweeName}</td>
-                            <td>${record.interviewDate}</td>
-                            <td>${record.interviewer}</td>
-                            <td>${record.l1Decision}</td>
-                            <td>${record.l2Scheduled ? 'Yes' : 'No'}</td>
-                            <td>${record.finalDecision}</td>
-                            <td><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
-                            <td>
-                                <button onclick="deleteRecord('${record.intervieweeName}')">Delete</button>
-                                ${record.l1Decision === 'L1 Passed with Comment' && !record.l2Scheduled ?
-                                    `<button onclick="scheduleL2('${record.intervieweeName}')">Schedule L2</button>` : ''}
-                            </td>
-                        `;
-                    }
-                    
+                    row.innerHTML = `
+                        <td>${record.intervieweeName}</td>
+                        <td>${record.interviewDate}</td>
+                        <td>${record.interviewer}</td>
+                        <td>${record.l1Decision}</td>
+                        <td>${record.l2Scheduled ? 'Yes' : 'No'}</td>
+                        <td>
+                             <select onchange="updateFinalDecision('${record.id}', this.value)">
+                                <option value="Pending" ${record.finalDecision === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Selected" ${record.finalDecision === 'Selected' ? 'selected' : ''}>Selected</option>
+                                <option value="Not Selected" ${record.finalDecision === 'Not Selected' ? 'selected' : ''}>Not Selected</option>
+                            </select>
+                        </td>
+                        <td><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
+                        <td>
+                            <button onclick="deleteRecord('${record.id}')">Delete</button>
+                        </td>
+                    `;
                     tableBody.appendChild(row);
                 });
+            } catch (error) {
+                console.error('Error:', error);
             }
         }
-
-        function deleteRecord(intervieweeName) {
-            // **Backend Integration Point:** Send the delete request to your backend.
-            //Implement your delete logic here (send request to backend)
-            alert(`Deleting record for ${intervieweeName}`);
-        }
-
-        function scheduleL2(intervieweeName) {
-            // Implement your L2 scheduling logic here (redirect to scheduling page or show a modal)
-            // **Backend Integration Point:**  Ideally, redirect to the scheduling page,
-            // pre-filled with the interviewee's data.
-            window.location.href = `schedule.html?intervieweeName=${intervieweeName}`;
-        }
-
-        // Toggle mobile menu
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            // Reload records if table structure needs to change
-            if (document.getElementById('recordTableBody').children.length > 0) {
-                loadRecords();
-            }
-        });
+    
+        window.onload = loadRecords;
     </script>
 </body>
 </html>

@@ -323,7 +323,7 @@
                     <p><strong>Date/Time:</strong> ${new Date(
                       interview.interviewDate
                     ).toLocaleString()}</p>
-                    <p><strong>Email:</strong> ${interview.email}</p>
+                    <p><strong>Email:</strong> ${interview.intervieweeEmail}</p>
                     <p><strong>Interview Round:</strong> ${
                       interview.typeOfInterview
                     }</p>
@@ -333,7 +333,7 @@
                     <a href="evaluation.html?name=${encodeURIComponent(
                       interview.intervieweeName
                     )}&email=${encodeURIComponent(
-                interview.email
+                interview.intervieweeEmail
               )}&date=${encodeURIComponent(
                 interview.interviewDate
               )}&round=${encodeURIComponent(

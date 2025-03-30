@@ -1,6 +1,7 @@
 package com.interviewer_scheduler.interviewer_scheduler.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "evaluation")
-    public class EvaluationModel {
+public class EvaluationModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,12 @@ import java.util.List;
     @Column(nullable = false)
     private LocalDateTime interviewTime;
 
-    private String L1_decision;
-    private String L2_scheduled;
+
+    private String l1Decision;
+
+
+    private String l2Scheduled;
+
     private String finalDecision;
 
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -36,13 +41,15 @@ import java.util.List;
 
     public EvaluationModel() {}
 
-    public EvaluationModel(String interviewerEmail, String intervieweeName, String intervieweeEmail, LocalDateTime interviewTime, String L1_decision, String L2_scheduled, String finalDecision, List<EvaluationParameter> parameters) {
+    public EvaluationModel(String interviewerEmail, String intervieweeName, String intervieweeEmail,
+                           LocalDateTime interviewTime, String l1Decision, String l2Scheduled,
+                           String finalDecision, List<EvaluationParameter> parameters) {
         this.interviewerEmail = interviewerEmail;
         this.intervieweeName = intervieweeName;
         this.intervieweeEmail = intervieweeEmail;
         this.interviewTime = interviewTime;
-        this.L1_decision = L1_decision;
-        this.L2_scheduled = L2_scheduled;
+        this.l1Decision = l1Decision;
+        this.l2Scheduled = l2Scheduled;
         this.finalDecision = finalDecision;
         this.parameters = parameters != null ? parameters : new ArrayList<>();
     }
@@ -62,11 +69,11 @@ import java.util.List;
     public LocalDateTime getInterviewTime() { return interviewTime; }
     public void setInterviewTime(LocalDateTime interviewTime) { this.interviewTime = interviewTime; }
 
-    public String getL1_decision() { return L1_decision; }
-    public void setL1_decision(String L1_decision) { this.L1_decision = L1_decision; }
+    public String getL1Decision() { return l1Decision; }
+    public void setL1Decision(String l1Decision) { this.l1Decision = l1Decision; }
 
-    public String getL2_scheduled() { return L2_scheduled; }
-    public void setL2_scheduled(String L2_scheduled) { this.L2_scheduled = L2_scheduled; }
+    public String getL2Scheduled() { return l2Scheduled; }
+    public void setL2Scheduled(String l2Scheduled) { this.l2Scheduled = l2Scheduled; }
 
     public String getFinalDecision() { return finalDecision; }
     public void setFinalDecision(String finalDecision) { this.finalDecision = finalDecision; }

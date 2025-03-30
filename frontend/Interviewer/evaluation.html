@@ -1,378 +1,434 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Interviewer - Evaluation Form</title>
-    <link rel="stylesheet" href="interviewer.css">
+    <link rel="stylesheet" href="interviewer.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #eff4fc;
-            margin: 0;
-            padding-top: 60px;
-            position: relative;
-            min-height: 100vh;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #eff4fc;
+        margin: 0;
+        padding-top: 60px;
+        position: relative;
+        min-height: 100vh;
+      }
 
-        .container {
-            width: 80%;
-            margin: 60px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            min-height: calc(100vh - 320px);  
-            margin-bottom: 80px; 
-            box-sizing: border-box;
-            position: relative;
-            overflow-y: auto;
-        }
+      .container {
+        width: 80%;
+        margin: 60px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        min-height: calc(100vh - 320px);
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        position: relative;
+        overflow-y: auto;
+      }
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
 
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
 
-        input[type="text"],
-        input[type="email"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+      input[type="text"],
+      input[type="email"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
 
-        select {
-            height: 34px;
-        }
+      select {
+        height: 34px;
+      }
 
-        #evaluation-form {
-            margin-top: 20px;
-        }
+      #evaluation-form {
+        margin-top: 20px;
+      }
 
-        .evaluation-section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
+      .evaluation-section {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+      }
 
-        .evaluation-section h2 {
-            font-size: 1.2em;
-            color: #555;
-            margin-top: 0;
-        }
+      .evaluation-section h2 {
+        font-size: 1.2em;
+        color: #555;
+        margin-top: 0;
+      }
 
-        .evaluation-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+      .evaluation-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
 
-        .evaluation-row label {
-            width: 30%;
-            text-align: right;
-            padding-right: 10px;
-        }
+      .evaluation-row label {
+        width: 30%;
+        text-align: right;
+        padding-right: 10px;
+      }
 
-        .evaluation-row select,
-        .evaluation-row input[type="text"] {
-            width: 60%;
-        }
+      .evaluation-row select,
+      .evaluation-row input[type="text"] {
+        width: 60%;
+      }
 
-        .evaluation-row button {
-            width: 10%;
-            padding: 5px;
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+      .evaluation-row button {
+        width: 10%;
+        padding: 5px;
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-        .evaluation-row button:hover {
-            background-color: #c9302c;
-        }
+      .evaluation-row button:hover {
+        background-color: #c9302c;
+      }
 
-        button {
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+      button {
+        background-color: #5cb85c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
 
-        button:hover {
-            background-color: #4cae4c;
-        }
+      button:hover {
+        background-color: #4cae4c;
+      }
 
-        #add-skill-button {
-            background-color: #5bc0de;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
+      #add-skill-button {
+        background-color: #5bc0de;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
 
-        #add-skill-button:hover {
-            background-color: #46b8da;
-        }
+      #add-skill-button:hover {
+        background-color: #46b8da;
+      }
 
-        .header {
-            background-color: white;
-            color: #344767;
-            height: 50px;
-            position: relative;
-            padding: 10px 20px; 
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-sizing: border-box;
-        }
+      .header {
+        background-color: white;
+        color: #344767;
+        height: 50px;
+        position: relative;
+        padding: 10px 20px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+      }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
 
-        .logo {
-            height: 120px; 
-        }
-        .header-center {
-            flex-grow: 1; 
-        }
+      .logo {
+        height: 120px;
+      }
+      .header-center {
+        flex-grow: 1;
+      }
 
-        .nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+      .nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
 
-        .nav a {
-            color: #192944;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin: 0 5px;
-        }
+      .nav a {
+        color: #192944;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 0 5px;
+      }
 
-        .nav a:hover {
-            background-color: #e4efff;
-        }
+      .nav a:hover {
+        background-color: #e4efff;
+      }
 
-        .logout-btn {
-            background-color:  #e94e31;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            cursor: pointer;
-            margin: 0px 40px;
-        }
+      .logout-btn {
+        background-color: #e94e31;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        margin: 0px 40px;
+      }
 
-        .logout-btn a {
-            color: white;
-            text-decoration: none;
-        }
+      .logout-btn a {
+        color: white;
+        text-decoration: none;
+      }
 
-        .logout-btn:hover {
-            background-color: #777;
-        }
+      .logout-btn:hover {
+        background-color: #777;
+      }
 
-        /* Rest of the CSS remains the same as in the previous version */
+      /* Rest of the CSS remains the same as in the previous version */
     </style>
-
-</head>
-<header>
+  </head>
+  <header>
     <div class="header">
-        <div class="header-left">
-            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
+      <div class="header-left">
+        <img src="/images/logoimage.png" alt="Company Logo" class="logo" />
+      </div>
+      <div class="header-center">
+        <div class="nav">
+          <a href="calendar.html">Calendar</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="evaluation.html">My Evaluations</a>
+          <a href="records.html">Records</a>
         </div>
-        <div class="header-center">
-            <div class="nav">
-                <a href="calendar.html">Calendar</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="evaluation.html">My Evaluations</a>
-                <a href="records.html">Records</a>
-            </div>
-        </div>
-        <button class="logout-btn"><a href="../index.html">Logout</a></button>
+      </div>
+      <button class="logout-btn"><a href="../index.html">Logout</a></button>
     </div>
-</header>
-<body>
+  </header>
+  <body>
     <div class="container">
-        <h1>Candidate Evaluation Form</h1>
+      <h1>Candidate Evaluation Form</h1>
 
-        <div id="candidate-info">
-            <!-- Candidate information will be displayed here -->
+      <div id="candidate-info">
+        <!-- Candidate information will be displayed here -->
+      </div>
+
+      <form id="evaluation-form">
+        <div class="evaluation-section" id="skill-evaluation">
+          <h2>Skill Evaluation</h2>
+          <button type="button" id="add-skill-button" onclick="addSkill()">
+            Add Skill
+          </button>
         </div>
 
-        <form id="evaluation-form">
-            <div class="evaluation-section" id="skill-evaluation">
-                <h2>Skill Evaluation</h2>
-                <button type="button" id="add-skill-button" onclick="addSkill()">Add Skill</button>
-            </div>
+        <div class="evaluation-section">
+          <h2>Overall Assessment</h2>
+          <label for="final-decision">Final Decision:</label>
+          <select id="final-decision" name="final-decision">
+            <option value="L1 Passed">L1 Passed</option>
+            <option value="L1 Passed with Comment">
+              L1 Passed with Comment
+            </option>
+            <option value="L2 Passed">L2 Passed</option>
+            <option value="L2 Passed with Comment">
+              L2 Passed with Comment
+            </option>
+          </select>
+        </div>
 
-            <div class="evaluation-section">
-                <h2>Overall Assessment</h2>
-                <label for="final-decision">Final Decision:</label>
-                <select id="final-decision" name="final-decision">
-                    <option value="L1 Passed">L1 Passed</option>
-                    <option value="L1 Passed with Comment">L1 Passed with Comment</option>
-                    <option value="L2 Passed">L2 Passed</option>
-                    <option value="L2 Passed with Comment">L2 Passed with Comment</option>
-                </select>
-            </div>
-
-            <button type="button" onclick="submitEvaluation()">Submit Evaluation</button>
-        </form>
+        <button type="button" onclick="submitEvaluation()">
+          Submit Evaluation
+        </button>
+      </form>
     </div>
 
     <script>
-        // Function to get URL parameters
-        function getParameterByName(name, url = window.location.href) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
+      // Function to get URL parameters
+      function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
 
-        // Load candidate information from URL parameters
-        function loadCandidateInfo() {
-            const name = getParameterByName('name');
-            const email = getParameterByName('email');
-            const date = getParameterByName('date');
-            const round = getParameterByName('round');
+      // Load candidate information from URL parameters
+      function loadCandidateInfo() {
+        const name = getParameterByName("name");
+        const candidateEmail = getParameterByName("email");
+        const date = getParameterByName("date");
+        const round = getParameterByName("round");
 
-            const candidateInfoDiv = document.getElementById('candidate-info');
-            candidateInfoDiv.innerHTML = `
+        const candidateInfoDiv = document.getElementById("candidate-info");
+        candidateInfoDiv.innerHTML = `
                 <h2>Evaluating: ${name}</h2>
-                <p>Email: ${email}</p>
+                <p>Email: ${candidateEmail}</p>
                 <p>Interview Date: ${date}</p>
-                <p>Interview Round: ${round || 'N/A'}</p>
+                <p>Interview Round: ${round || "N/A"}</p>
             `;
-        }
+      }
 
-        // Rest of the script remains the same as in the previous version
-        function createSkillRow(skill) {
-            const row = document.createElement('div');
-            row.classList.add('evaluation-row');
+      // Rest of the script remains the same as in the previous version
+      function createSkillRow(skill) {
+        const row = document.createElement("div");
+        row.classList.add("evaluation-row");
 
-            // Skill Label
-            const skillLabel = document.createElement('label');
-            skillLabel.textContent = skill;
-            row.appendChild(skillLabel);
+        // Skill Label
+        const skillLabel = document.createElement("label");
+        skillLabel.textContent = skill;
+        row.appendChild(skillLabel);
 
-            // Rating Select
-            const ratingSelect = document.createElement('select');
-            ratingSelect.name = `rating-${skill.replace(/\s+/g, '-').toLowerCase()}`;
-            const ratings = ["Average", "Good", "Not Evaluated", "Poor", "Very Good"];
-            ratings.forEach(rating => {
-                const option = document.createElement('option');
-                option.value = rating;
-                option.textContent = rating;
-                ratingSelect.appendChild(option);
-            });
-            row.appendChild(ratingSelect);
+        // Rating Select
+        const ratingSelect = document.createElement("select");
+        ratingSelect.name = `rating-${skill
+          .replace(/\s+/g, "-")
+          .toLowerCase()}`;
+        const ratings = [
+          "Average",
+          "Good",
+          "Not Evaluated",
+          "Poor",
+          "Very Good",
+        ];
+        ratings.forEach((rating) => {
+          const option = document.createElement("option");
+          option.value = rating;
+          option.textContent = rating;
+          ratingSelect.appendChild(option);
+        });
+        row.appendChild(ratingSelect);
 
-            // Topics Input
-            const topicsInput = document.createElement('input');
-            topicsInput.type = 'text';
-            topicsInput.name = `topics-${skill.replace(/\s+/g, '-').toLowerCase()}`;
-            topicsInput.placeholder = 'Topics Used for Evaluation';
-            row.appendChild(topicsInput);
+        // Topics Input
+        const topicsInput = document.createElement("input");
+        topicsInput.type = "text";
+        topicsInput.name = `topics-${skill.replace(/\s+/g, "-").toLowerCase()}`;
+        topicsInput.placeholder = "Topics Used for Evaluation";
+        row.appendChild(topicsInput);
 
-            // Comments Input
-            const commentsInput = document.createElement('input');
-            commentsInput.type = 'text';
-            commentsInput.name = `comments-${skill.replace(/\s+/g, '-').toLowerCase()}`;
-            commentsInput.placeholder = 'Comments';
-            row.appendChild(commentsInput);
+        // Comments Input
+        const commentsInput = document.createElement("input");
+        commentsInput.type = "text";
+        commentsInput.name = `comments-${skill
+          .replace(/\s+/g, "-")
+          .toLowerCase()}`;
+        commentsInput.placeholder = "Comments";
+        row.appendChild(commentsInput);
 
-            // Remove Button
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.onclick = function () {
-                row.remove();
-            };
-            row.appendChild(removeButton);
-
-            return row;
-        }
-
-        function addSkill() {
-            const skillName = prompt("Enter the skill name:");
-            if (skillName) {
-                const skillEvaluationDiv = document.getElementById('skill-evaluation');
-                const newSkillRow = createSkillRow(skillName);
-                skillEvaluationDiv.appendChild(newSkillRow);
-            }
-        }
-
-        // Initial Skills
-        const initialSkills = ["Basic Algorithm", "Code and Syntax", "Design Patterns", "SQL", "Git", "Overall Attitude", "Learning Ability", "Resume Explanation", "Communication"];
-
-        function populateSkillEvaluation() {
-            const skillEvaluationDiv = document.getElementById('skill-evaluation');
-            skillEvaluationDiv.innerHTML = '<h2>Skill Evaluation</h2><button type="button" id="add-skill-button" onclick="addSkill()">Add Skill</button>';
-            initialSkills.forEach(skill => {
-                const row = createSkillRow(skill);
-                skillEvaluationDiv.appendChild(row);
-            });
-        }
-
-        function submitEvaluation() {
-            const candidateName = getParameterByName('name');
-            const finalDecision = document.getElementById('final-decision').value;
-            const round = getParameterByName('round');
-
-            const skillEvaluations = {};
-            const skillRows = document.querySelectorAll('.evaluation-row');
-            skillRows.forEach(row => {
-                const skillLabel = row.querySelector('label').textContent;
-                const skillKey = skillLabel.replace(/\s+/g, '-').toLowerCase();
-                skillEvaluations[skillLabel] = {
-                    rating: row.querySelector(`select[name="rating-${skillKey}"]`).value,
-                    topics: row.querySelector(`input[name="topics-${skillKey}"]`).value,
-                    comments: row.querySelector(`input[name="comments-${skillKey}"]`).value
-                };
-            });
-
-            console.log('Evaluation Submitted:', {
-                candidateName,
-                round,
-                skillEvaluations,
-                finalDecision
-            });
-        }
-
-        window.onload = function () {
-            loadCandidateInfo();
-            populateSkillEvaluation();
+        // Remove Button
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.onclick = function () {
+          row.remove();
         };
-    </script>
-</body>
+        row.appendChild(removeButton);
 
+        return row;
+      }
+
+      function addSkill() {
+        const skillName = prompt("Enter the skill name:");
+        if (skillName) {
+          const skillEvaluationDiv =
+            document.getElementById("skill-evaluation");
+          const newSkillRow = createSkillRow(skillName);
+          skillEvaluationDiv.appendChild(newSkillRow);
+        }
+      }
+
+      // Initial Skills
+      const initialSkills = [
+        "Basic Algorithm",
+        "Code and Syntax",
+        "Design Patterns",
+        "SQL",
+        "Git",
+        "Overall Attitude",
+        "Learning Ability",
+        "Resume Explanation",
+        "Communication",
+      ];
+
+      function populateSkillEvaluation() {
+        const skillEvaluationDiv = document.getElementById("skill-evaluation");
+        skillEvaluationDiv.innerHTML =
+          '<h2>Skill Evaluation</h2><button type="button" id="add-skill-button" onclick="addSkill()">Add Skill</button>';
+        initialSkills.forEach((skill) => {
+          const row = createSkillRow(skill);
+          skillEvaluationDiv.appendChild(row);
+        });
+      }
+
+      function submitEvaluation() {
+        const interviewerEmail = localStorage.getItem("email");
+        const candidateName = getParameterByName("name");
+        const candidateEmail = getParameterByName("email");
+        const interviewTime = getParameterByName("date");
+        const finalDecision = document.getElementById("final-decision").value;
+
+        const skillEvaluations = [];
+        const skillRows = document.querySelectorAll(".evaluation-row");
+        skillRows.forEach((row) => {
+          const skillLabel = row.querySelector("label").textContent;
+          const skillKey = skillLabel.replace(/\s+/g, "-").toLowerCase();
+          skillEvaluations.push({
+            skill: skillLabel,
+            rating: row.querySelector(`select[name="rating-${skillKey}"]`)
+              .value,
+            topicsUsed: row.querySelector(`input[name="topics-${skillKey}"]`)
+              .value,
+            comments: row.querySelector(`input[name="comments-${skillKey}"]`)
+              .value,
+          });
+        });
+
+        const requestBody = {
+          interviewerEmail: interviewerEmail,
+          intervieweeName: candidateName,
+          intervieweeEmail: candidateEmail,
+          interviewTime: interviewTime,
+          l1Decision: finalDecision, // Use camelCase
+          l2Scheduled: finalDecision === "L1 Passed" ? "No" : "Yes",
+          finalDecision: "pending",
+          parameters: skillEvaluations,
+        };
+
+        console.log("Sending Request:", requestBody);
+
+        fetch("http://localhost:8080/api/evaluations", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Response:", data);
+            alert("Evaluation submitted successfully!");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Failed to submit evaluation.");
+          });
+      }
+
+      window.onload = function () {
+        loadCandidateInfo();
+        populateSkillEvaluation();
+      };
+    </script>
+  </body>
 </html>

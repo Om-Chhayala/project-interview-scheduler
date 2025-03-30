@@ -5,9 +5,11 @@ import com.interviewer_scheduler.interviewer_scheduler.Model.EvaluationModel;
 import com.interviewer_scheduler.interviewer_scheduler.Model.EvaluationParameter;
 import com.interviewer_scheduler.interviewer_scheduler.Service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -20,6 +22,19 @@ public class EvaluationController {
     @PostMapping
     public EvaluationModel createEvaluation(@RequestBody EvaluationModel evaluation) {
         return evaluationService.createEvaluation(evaluation);
+    }
+
+    @PatchMapping("/{id}/final-decision")
+    public ResponseEntity<EvaluationModel> updateFinalDecision(
+            @PathVariable Long id, @RequestParam String finalDecision) {
+        Optional<EvaluationModel> updatedEvaluation = evaluationService.updateFinalDecision(id, finalDecision);
+        return updatedEvaluation.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEvaluation(@PathVariable Long id) {
+        evaluationService.deleteEvaluation(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping

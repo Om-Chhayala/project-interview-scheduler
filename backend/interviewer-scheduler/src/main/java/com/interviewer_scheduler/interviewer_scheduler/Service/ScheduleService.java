@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScheduleService {
@@ -24,7 +25,7 @@ public class ScheduleService {
     }
 
     // Get interviews for a specific interviewer
-    public List<Schedule> getSchedulesByInterviewer(String interviewerName) {
-        return scheduleRepository.findByInterviewerName(interviewerName);
+    public List<Schedule> getSchedulesByInterviewer(String email) {
+        return scheduleRepository.findByEmail(email);
     }
 }

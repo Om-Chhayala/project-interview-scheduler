@@ -5,9 +5,11 @@ import com.interviewer_scheduler.interviewer_scheduler.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.util.Elements;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/users")
 public class UserController {
 

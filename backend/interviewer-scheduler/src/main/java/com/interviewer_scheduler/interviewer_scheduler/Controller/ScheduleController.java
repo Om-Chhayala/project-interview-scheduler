@@ -25,8 +25,8 @@ public class ScheduleController {
         return scheduleService.getAllSchedules();
     }
 
-    @GetMapping("/interviewer/{interviewerName}")
-    public List<Schedule> getSchedulesByInterviewer(@PathVariable String interviewerName) {
-        return scheduleService.getSchedulesByInterviewer(interviewerName);
+    @GetMapping("/interviewer")
+    public List<Schedule> getSchedulesByInterviewer(@RequestParam String email) {
+        return scheduleService.getSchedulesByInterviewer(email);
     }
 }

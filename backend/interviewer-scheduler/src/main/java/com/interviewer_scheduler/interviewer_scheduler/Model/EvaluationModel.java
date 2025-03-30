@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "evaluation")
-public class EvaluationModel {
+    public class EvaluationModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +20,14 @@ public class EvaluationModel {
     @Column(nullable = false)
     private String intervieweeName;
 
-    // type of evaluation
-
     @Column(nullable = false)
     private String intervieweeEmail;
 
     @Column(nullable = false)
     private LocalDateTime interviewTime;
 
-    private String comment; // remove
+    private String L1_decision;
+    private String L2_scheduled;
     private String finalDecision;
 
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,12 +36,13 @@ public class EvaluationModel {
 
     public EvaluationModel() {}
 
-    public EvaluationModel(String interviewerEmail, String intervieweeName, String intervieweeEmail, LocalDateTime interviewTime, String comment, String finalDecision, List<EvaluationParameter> parameters) {
+    public EvaluationModel(String interviewerEmail, String intervieweeName, String intervieweeEmail, LocalDateTime interviewTime, String L1_decision, String L2_scheduled, String finalDecision, List<EvaluationParameter> parameters) {
         this.interviewerEmail = interviewerEmail;
         this.intervieweeName = intervieweeName;
         this.intervieweeEmail = intervieweeEmail;
         this.interviewTime = interviewTime;
-        this.comment = comment;
+        this.L1_decision = L1_decision;
+        this.L2_scheduled = L2_scheduled;
         this.finalDecision = finalDecision;
         this.parameters = parameters != null ? parameters : new ArrayList<>();
     }
@@ -62,8 +62,11 @@ public class EvaluationModel {
     public LocalDateTime getInterviewTime() { return interviewTime; }
     public void setInterviewTime(LocalDateTime interviewTime) { this.interviewTime = interviewTime; }
 
-    public String getComment() { return comment; }
-    public void setComment(String comment) { this.comment = comment; }
+    public String getL1_decision() { return L1_decision; }
+    public void setL1_decision(String L1_decision) { this.L1_decision = L1_decision; }
+
+    public String getL2_scheduled() { return L2_scheduled; }
+    public void setL2_scheduled(String L2_scheduled) { this.L2_scheduled = L2_scheduled; }
 
     public String getFinalDecision() { return finalDecision; }
     public void setFinalDecision(String finalDecision) { this.finalDecision = finalDecision; }

@@ -16,21 +16,24 @@ public class UserService {
     private UserRepository userRepository;
 
     // Register a new user
-    public String registerUser(User user) {
+    public User registerUser(User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            return "Email already registered!";
+            throw new IllegalArgumentException("Email already registered!");
         }
-        userRepository.save(user);
-        return "User registered successfully!";
+        return userRepository.save(user);
     }
 
+
     // Login user
-    public String loginUser(String email, String password) {
-        Optional<User> existingUser = userRepository.findByEmail(email);
-        if (existingUser.isPresent() && existingUser.get().getPassword().equals(password)) {
-            return "Login successful!";
+    public User loginUser(String email, String password) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getPassword().equals(password)) {
+                return user; // Returning full user details
+            }
         }
-        return "Invalid credentials!";
+        throw new RuntimeException("Invalid credentials");
     }
 
     public List<User> getInterviewers() {

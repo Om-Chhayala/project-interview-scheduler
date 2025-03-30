@@ -18,13 +18,13 @@ public class UserController {
 
     // Signup (Register a new user)
     @PostMapping("/signup")
-    public String registerUser(@RequestBody User user) {
+    public User registerUser(@RequestBody User user) {
         return userService.registerUser(user);
     }
 
     // Login (Accepting email & password in body)
     @PostMapping("/login")
-    public String loginUser(@RequestBody User loginRequest) {
+    public User loginUser(@RequestBody User loginRequest) {
         return userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
     }
 

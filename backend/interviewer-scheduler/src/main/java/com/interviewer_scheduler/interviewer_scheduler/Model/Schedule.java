@@ -15,7 +15,7 @@ public class Schedule {
     private String typeOfInterview;
 
     @Column(nullable = false)
-    private String interviewerName;
+    private String intervieweeEmail;
 
     @Column(nullable = false)
     private String intervieweeName;
@@ -30,9 +30,9 @@ public class Schedule {
 
     public Schedule() {}
 
-    public Schedule(String typeOfInterview, String interviewerName, String intervieweeName, String email, String resumeLink, LocalDateTime interviewDate) {
+    public Schedule(String typeOfInterview, String intervieweeEmail, String intervieweeName, String email, String resumeLink, LocalDateTime interviewDate) {
         this.typeOfInterview = typeOfInterview;
-        this.interviewerName = interviewerName;
+        this.intervieweeEmail = intervieweeEmail;
         this.intervieweeName = intervieweeName;
         this.email = email;
         this.resumeLink = resumeLink;
@@ -45,8 +45,8 @@ public class Schedule {
     public String getTypeOfInterview() { return typeOfInterview; }
     public void setTypeOfInterview(String typeOfInterview) { this.typeOfInterview = typeOfInterview; }
 
-    public String getInterviewerName() { return interviewerName; }
-    public void setInterviewerName(String interviewerName) { this.interviewerName = interviewerName; }
+    public String getIntervieweeEmail() { return intervieweeEmail; }
+    public void setIntervieweeEmail(String intervieweeEmail) { this.intervieweeEmail = intervieweeEmail; }
 
     public String getIntervieweeName() { return intervieweeName; }
     public void setIntervieweeName(String intervieweeName) { this.intervieweeName = intervieweeName; }

@@ -3,7 +3,6 @@
 <head>
     <title>HR - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="hr.css">
     <style>
         body {
           font-family: Arial, sans-serif;
@@ -258,8 +257,8 @@
             <thead>
                 <tr>
                     <th>Interviewee Name</th>
+                    <th>Interviewer Email</th>
                     <th>Interviewee Email</th>
-                    <th>Interviewer</th>
                     <th>Date & Time</th>
                     <th>Resume</th>
                 </tr>
@@ -272,24 +271,10 @@
         <p id="noInterviewsMessage" class="no-interviews" style="display:none;">No interviews scheduled.</p>
     </div>
     <script>
-        function loadScheduledInterviews() {
-            // Mock Data - Replace with actual data fetched from the backend
-            const scheduledInterviews = [
-                {
-                    intervieweeName: 'John Doe',
-                    intervieweeEmail: 'john.doe@example.com',
-                    interviewer: 'interviewer1@company.com',
-                    dateTime: '2024-01-25 10:00',
-                    resume: 'john_doe_resume.pdf'
-                },
-                {
-                    intervieweeName: 'Jane Smith',
-                    intervieweeEmail: 'jane.smith@example.com',
-                    interviewer: 'interviewer2@company.com',
-                    dateTime: '2024-01-26 14:00',
-                    resume: 'jane_smith_resume.pdf'
-                }
-            ];
+         async function loadScheduledInterviews() {
+        try {
+            const response = await fetch('http://localhost:8080/api/schedules');
+            const scheduledInterviews = await response.json();
 
             const interviewBody = document.getElementById('interviewBody');
             const noInterviewsMessage = document.getElementById('noInterviewsMessage');
@@ -308,18 +293,23 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${interview.intervieweeName}</td>
+                        <td>${interview.email}</td>
                         <td>${interview.intervieweeEmail}</td>
-                        <td>${interview.interviewer}</td>
-                        <td>${interview.dateTime}</td>
-                        <td><a href="${interview.resume}" target="_blank">View</a></td>
+                        <td>${new Date(interview.interviewDate).toLocaleString()}</td>
+                        <td><a href="${interview.resumeLink}" target="_blank">View</a></td>
                     `;
                     interviewBody.appendChild(row);
                 });
             }
+        } catch (error) {
+            console.error('Error fetching interview schedules:', error);
+            document.getElementById('noInterviewsMessage').textContent = 'Failed to load interviews. Please try again later.';
+            document.getElementById('noInterviewsMessage').style.display = 'block';
         }
+    }
 
-        // Load scheduled interviews on page load
-        loadScheduledInterviews();
+    // Load scheduled interviews on page load
+    document.addEventListener('DOMContentLoaded', loadScheduledInterviews);
     </script>
 </body>
 </html>

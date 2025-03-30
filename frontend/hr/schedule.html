@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>HR - Schedule Interview</title>
-    <link rel="stylesheet" href="hr.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="hr.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
         font-family: Arial, sans-serif;
         background-color: #eff4fc;
         margin: 0;
-        padding: 60px 0 30px 0; 
+        padding: 60px 0 30px 0;
         position: relative;
-    }
+      }
 
-    .container {
+      .container {
         width: 60%;
         margin: 50px auto;
         background: white;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+      }
 
-    h1 {
+      h1 {
         text-align: center;
         color: #333;
-    }
+      }
 
-    label {
+      label {
         display: block;
         margin-top: 10px;
         font-weight: bold;
-    }
+      }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="datetime-local"],
-    select {
+      input[type="text"],
+      input[type="email"],
+      input[type="datetime-local"],
+      select {
         width: 100%;
         padding: 8px;
         margin-top: 5px;
         border: 1px solid #ddd;
         border-radius: 4px;
-        box-sizing: border-box; 
-    }
+        box-sizing: border-box;
+      }
 
-    select {
+      select {
         height: 34px;
-    }
+      }
 
-    button {
+      button {
         background-color: #5cb85c;
         color: white;
         padding: 10px 20px;
@@ -57,356 +57,373 @@
         border-radius: 4px;
         cursor: pointer;
         margin-top: 20px;
-    }
+      }
 
-    button:hover {
+      button:hover {
         background-color: #4cae4c;
-    }
+      }
 
-    .employee-list {
+      .employee-list {
         margin-top: 20px;
         border: 1px solid #ddd;
         border-radius: 4px;
         padding: 10px;
-    }
+      }
 
-    .employee-list h2 {
+      .employee-list h2 {
         margin-top: 0;
         color: #555;
-    }
+      }
 
-    table {
+      table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
-    }
+      }
 
-    th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
-    }
+      }
 
-    th {
+      th {
         background-color: #f0f0f0;
-    }
+      }
 
-    .header {
-    background-color: white;
-    color: #344767;
-    height: 50px;
-    position: relative;
-    padding: 10px 20px; 
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    height: 120px; 
-    margin-right: 15px;
-}
-.header-center {
-    flex-grow: 1;
-}
-
-.nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.nav a {
-    color: #192944;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 0 5px;
-}
-
-.nav a:hover {
-    background-color: #e4efff;
-}
-.logout-btn {
-    background-color:  #e94e31;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    cursor: pointer;
-    margin: 0px 40px;
-}
-
-.logout-btn a {
-    color: white;
-    text-decoration: none;
-}
-
-.logout-btn:hover {
-    background-color: #777;
-}
-
-/* Media Queries for Responsive Design */
-@media screen and (max-width: 1200px) {
-    .container {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .container {
-        width: 90%;
-    }
-    
-    .logo {
-        height: 80px;
-    }
-    
-    .logout-btn {
-        margin: 0px 20px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    body {
-        padding-top: 120px;
-    }
-    
-    .header {
-        height: auto;
-        flex-direction: column;
-        padding: 10px;
-    }
-    
-    .header-left {
-        margin-bottom: 10px;
-    }
-    
-    .header-center {
-        width: 100%;
-    }
-    
-    .nav {
-        flex-wrap: wrap;
-    }
-    
-    .nav a {
-        margin: 5px;
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-    
-    .logout-btn {
-        margin: 10px 0;
-    }
-    
-    .logo {
-        height: 60px;
-        margin-right: 5px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .container {
-        width: 95%;
-        margin: 20px auto;
-        padding: 15px;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    .employee-list {
-        overflow-x: auto;
-    }
-    
-    table {
-        font-size: 14px;
-    }
-    
-    th, td {
-        padding: 6px;
-    }
-    
-    button {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding-top: 150px;
-    }
-    
-    .nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .nav a {
-        width: 80%;
+      .header {
+        background-color: white;
+        color: #344767;
+        height: 50px;
+        position: relative;
+        padding: 10px 20px;
         text-align: center;
-        margin: 3px 0;
-    }
-}
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-    </style>
-</head>
-<body>
-    <div class="header">
-        <div class="header-left">
-            <img src="/images/logoimage.png" alt="Company Logo" class="logo">
-        </div>
-        <div class="header-center">
-            <div class="nav">
-                <a href="schedule.html">Schedule Interview</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="record.html">Evaluation Records</a>
-            </div>
-        </div>
-        <button class="logout-btn"><a href="../index.html">Logout</a></button>
-    </div>
-    <div class="container">
-        <h1>Schedule Interview</h1>
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
 
-        <label for="intervieweeName">Interviewee Name:</label>
-        <input type="text" id="intervieweeName" name="intervieweeName" required>
+      .logo {
+        height: 120px;
+        margin-right: 15px;
+      }
+      .header-center {
+        flex-grow: 1;
+      }
 
-        <label for="intervieweeEmail">Interviewee Email:</label>
-        <input type="email" id="intervieweeEmail" name="intervieweeEmail" required>
+      .nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
 
-        <label for="intervieweeResume">Interviewee Resume (URL):</label>
-        <input type="text" id="intervieweeResume" name="intervieweeResume" placeholder="Enter URL" required>
+      .nav a {
+        color: #192944;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 0 5px;
+      }
 
-        <label for="interviewRound">Interview Round:</label>
-        <select id="level" name="level" required>
-            <option value="">Select Interview Round</option>
-            <option value="level1">L1</option>>
-            <option value="level2">L2</option>>
-        </select>
+      .nav a:hover {
+        background-color: #e4efff;
+      }
+      .logout-btn {
+        background-color: #e94e31;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        margin: 0px 40px;
+      }
 
-        <label for="interviewer">Interviewer:</label>
-        <select id="interviewer" name="interviewer" required>
-            <option value="">Select Interviewer</option>
-            <option value="interviewer1@company.com">John Doe</option>>
-        </select>
+      .logout-btn a {
+        color: white;
+        text-decoration: none;
+      }
 
+      .logout-btn:hover {
+        background-color: #777;
+      }
 
-        <label for="interviewDateTime">Interview Date & Time:</label>
-        <input type="datetime-local" id="interviewDateTime" name="interviewDateTime" required>
+      /* Media Queries for Responsive Design */
+      @media screen and (max-width: 1200px) {
+        .container {
+          width: 80%;
+        }
+      }
 
-        <button onclick="scheduleInterview()">Schedule Interview</button>
-
-        <div class="employee-list">
-            <h2>Interviewee List</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Resume</th>
-                    </tr>
-                </thead>
-                <tbody id="intervieweeTableBody">
-                    <!-- Data will be dynamically added here -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <script>
-        // Function to fetch interviewers and populate the dropdown
-        function populateInterviewers() {
-            fetch('/api/interviewers') // Replace with your actual API endpoint
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(interviewers => {
-                    const interviewerSelect = document.getElementById('interviewer');
-                    interviewers.forEach(interviewer => {
-                        const option = document.createElement('option');
-                        option.value = interviewer;  // Use email as value
-                        option.textContent = interviewer; // Display interviewer's name or email
-                        interviewerSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching interviewers:', error));
+      @media screen and (max-width: 992px) {
+        .container {
+          width: 90%;
         }
 
+        .logo {
+          height: 80px;
+        }
+
+        .logout-btn {
+          margin: 0px 20px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        body {
+          padding-top: 120px;
+        }
+
+        .header {
+          height: auto;
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .header-left {
+          margin-bottom: 10px;
+        }
+
+        .header-center {
+          width: 100%;
+        }
+
+        .nav {
+          flex-wrap: wrap;
+        }
+
+        .nav a {
+          margin: 5px;
+          font-size: 14px;
+          padding: 8px 15px;
+        }
+
+        .logout-btn {
+          margin: 10px 0;
+        }
+
+        .logo {
+          height: 60px;
+          margin-right: 5px;
+        }
+      }
+
+      @media screen and (max-width: 576px) {
+        .container {
+          width: 95%;
+          margin: 20px auto;
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .employee-list {
+          overflow-x: auto;
+        }
+
+        table {
+          font-size: 14px;
+        }
+
+        th,
+        td {
+          padding: 6px;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        body {
+          padding-top: 150px;
+        }
+
+        .nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav a {
+          width: 80%;
+          text-align: center;
+          margin: 3px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <img src="/images/logoimage.png" alt="Company Logo" class="logo" />
+      </div>
+      <div class="header-center">
+        <div class="nav">
+          <a href="schedule.html">Schedule Interview</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="record.html">Evaluation Records</a>
+        </div>
+      </div>
+      <button class="logout-btn"><a href="../index.html">Logout</a></button>
+    </div>
+    <div class="container">
+      <h1>Schedule Interview</h1>
+
+      <label for="intervieweeName">Interviewee Name:</label>
+      <input type="text" id="intervieweeName" name="intervieweeName" required />
+
+      <label for="intervieweeEmail">Interviewee Email:</label>
+      <input
+        type="email"
+        id="intervieweeEmail"
+        name="intervieweeEmail"
+        required
+      />
+
+      <label for="intervieweeResume">Interviewee Resume (URL):</label>
+      <input
+        type="text"
+        id="intervieweeResume"
+        name="intervieweeResume"
+        placeholder="Enter URL"
+        required
+      />
+
+      <label for="interviewRound">Interview Round:</label>
+      <select id="level" name="level" required>
+        <option value="">Select Interview Round</option>
+        <option value="level1">L1</option>
+        <option value="level2">L2</option>
+      </select>
+
+      <label for="interviewer">Interviewer:</label>
+      <select id="interviewer" name="interviewer" required>
+        <option value="">Select Interviewer</option>
+      </select>
+
+      <label for="interviewDateTime">Interview Date & Time:</label>
+      <input
+        type="datetime-local"
+        id="interviewDateTime"
+        name="interviewDateTime"
+        required
+      />
+
+      <button id="scheduleBtn">Schedule Interview</button>
+
+      <div class="employee-list">
+        <h2>Interviewee List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Resume</th>
+            </tr>
+          </thead>
+          <tbody id="intervieweeTableBody">
+            <!-- Data will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      // Function to fetch interviewers and populate the dropdown
+      function populateInterviewers() {
+        fetch("http://localhost:8080/api/users/getinterviewer") // Replace with your actual API endpoint
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((interviewers) => {
+            const interviewerSelect = document.getElementById("interviewer");
+            interviewers.forEach((interviewer) => {
+              const option = document.createElement("option");
+              option.value = interviewer.email; // Use email as value
+              option.textContent = interviewer.name; // Display interviewer's name or email
+              interviewerSelect.appendChild(option);
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching interviewers:", error)
+          );
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
         function scheduleInterview() {
-    const intervieweeName = document.getElementById('intervieweeName').value;
-    const intervieweeEmail = document.getElementById('intervieweeEmail').value;
-    const intervieweeResume = document.getElementById('intervieweeResume').value;
-    const interviewer = document.getElementById('interviewer').value; // Interviewer's email
-    const interviewDateTime = document.getElementById('interviewDateTime').value;
+          const intervieweeName = document.getElementById("intervieweeName");
+          const intervieweeEmail = document.getElementById("intervieweeEmail");
+          const intervieweeResume =
+            document.getElementById("intervieweeResume");
+          const interviewer = document.getElementById("interviewer");
+          const interviewDateTime =
+            document.getElementById("interviewDateTime");
+          const typeOfInterview = document.getElementById("typeOfInterview");
 
-    // Basic Validation
-    if (!intervieweeName || !intervieweeEmail || !intervieweeResume || !interviewer || !interviewDateTime) {
-        alert('Please fill in all the fields.');
-        return;
-    }
+          if (
+            !intervieweeName.value ||
+            !intervieweeEmail.value ||
+            !intervieweeResume.value ||
+            !interviewer.value ||
+            !interviewDateTime.value
+          ) {
+            alert("Please fill in all the fields.");
+            return;
+          }
 
-    const scheduleData = {
-        interviewerName: interviewer, 
-        intervieweeName: intervieweeName,
-        email: intervieweeEmail,
-        resumeLink: intervieweeResume,
-        interviewDate: interviewDateTime
-    };
+          const scheduleData = {
+            typeOfInterview: document.getElementById("level").value, 
+            intervieweeEmail: intervieweeEmail.value,
+            intervieweeName: intervieweeName.value,
+            email: interviewer.value,
+            resumeLink: intervieweeResume.value,
+            interviewDate: interviewDateTime.value,
+          };
 
-    fetch('/api/schedules', { // Replace with actual API endpoint
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(scheduleData) // Ensure JSON format
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+          console.log(scheduleData);
+          
 
-        // Update the table dynamically
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td>${intervieweeName}</td>
-            <td>${intervieweeEmail}</td>
-            <td><a href="${intervieweeResume}" target="_blank">View Resume</a></td>
-        `;
-        document.getElementById('intervieweeTableBody').appendChild(newRow);
+          fetch("http://localhost:8080/api/schedules", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(scheduleData),
+          })
+            .then((response) => {
+              if (!response.ok)
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Success:", data);
+              alert("Interview scheduled successfully!");
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("An error occurred. Please try again.");
+            });
+        }
 
-        // Success message
-        alert('Interview scheduled successfully!');
+        document
+          .getElementById("scheduleBtn")
+          .addEventListener("click", scheduleInterview);
+      });
 
-        // Clear form fields
-        document.getElementById('intervieweeName').value = '';
-        document.getElementById('intervieweeEmail').value = '';
-        document.getElementById('intervieweeResume').value = '';
-        document.getElementById('interviewer').selectedIndex = 0;
-        document.getElementById('interviewDateTime').value = '';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while scheduling the interview. Please try again.');
-    });
-}
-
-
-        // Call populateInterviewers when the page loads
-        window.onload = populateInterviewers;
-
+      // Call populateInterviewers when the page loads
+      window.onload = populateInterviewers;
     </script>
-</body>
+  </body>
 </html>

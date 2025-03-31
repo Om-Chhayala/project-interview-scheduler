@@ -37,6 +37,12 @@ public class EvaluationController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/by-email")
+    public ResponseEntity<List<EvaluationModel>> getEvaluationsByEmail(@RequestParam String intervieweeEmail) {
+        List<EvaluationModel> evaluations = evaluationService.getEvaluationsByEmail(intervieweeEmail);
+        return evaluations.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(evaluations);
+    }
+
     @GetMapping
     public List<EvaluationModel> getAllEvaluations() {
         return evaluationService.getAllEvaluations();

@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>HR - Evaluation Records</title>
-    <link rel="stylesheet" href="hr.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
         background-color: #eff4fc;
         margin: 0;
         padding: 0;
-    }
+      }
 
-    .container {
+      .container {
         width: 80%;
         margin: 100px auto;
         background: white;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+      }
 
-    h1 {
+      h1 {
         text-align: center;
         color: #333;
-    }
+      }
 
-    .record-table {
+      .record-table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-    }
+      }
 
-    .record-table th, .record-table td {
+      .record-table th,
+      .record-table td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
-    }
+      }
 
-    .record-table th {
+      .record-table th {
         background-color: #f0f0f0;
-    }
+      }
 
-    .record-table tr:nth-child(even) {
+      .record-table tr:nth-child(even) {
         background-color: #f9f9f9;
-    }
+      }
 
-    .record-table a {
+      .record-table a {
         text-decoration: none;
         color: #007bff;
-    }
+      }
 
-    .record-table a:hover {
+      .record-table a:hover {
         text-decoration: underline;
-    }
+      }
 
-    .button-container {
+      .button-container {
         text-align: center;
         margin-top: 20px;
-    }
+      }
 
-    .button-container button {
+      .button-container button {
         background-color: #5cb85c;
         color: white;
         padding: 10px 20px;
@@ -68,346 +69,423 @@
         border-radius: 4px;
         cursor: pointer;
         margin: 0 10px;
-    }
+      }
 
-    .button-container button:hover {
+      .button-container button:hover {
         background-color: #4cae4c;
-    }
-    .no-records {
+      }
+      .no-records {
         text-align: center;
         font-style: italic;
         color: #888;
         margin-top: 20px;
-    }
-    .header {
-    background-color: white;
-    color: #344767;
-    height: 50px;
-    position: relative;
-    padding: 10px 20px; 
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    height: 120px; 
-    margin-right: 15px;
-}
-.header-center {
-    flex-grow: 1;
-}
-
-.nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.nav a {
-    color: #192944;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 0 5px;
-}
-
-.nav a:hover {
-    background-color: #e4efff;
-}
-.logout-btn {
-    background-color:  #e94e31;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    cursor: pointer;
-    margin: 0px 40px;
-}
-
-.logout-btn a {
-    color: white;
-    text-decoration: none;
-}
-
-.logout-btn:hover {
-    background-color: #777;
-}
-
-/* Mobile Menu */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #192944;
-}
-
-/* Media Queries */
-@media screen and (max-width: 1024px) {
-    .container {
-        width: 90%;
-    }
-    
-    .logo {
-        height: 100px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .header {
-        height: auto;
-        flex-direction: column;
-        padding: 10px;
-    }
-    
-    .header-left {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .logo {
-        height: 80px;
-    }
-    
-    .header-center {
-        width: 100%;
-    }
-    
-    .nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .nav a {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .container {
-        width: 95%;
-        margin-top: 150px;
-        padding: 15px;
-    }
-    
-    .logout-btn {
-        margin: 10px 0;
-    }
-    
-    /* Mobile-friendly table */
-    .record-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    
-    .button-container button {
-        padding: 8px 15px;
-        margin: 5px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
-        margin-top: 180px;
-        width: 100%;
-        border-radius: 0;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    .menu-toggle {
-        display: block;
-    }
-    
-    .nav {
-        display: none;
-    }
-    
-    .nav.active {
-        display: flex;
-    }
-    
-    .header-center {
-        order: 3;
-    }
-    
-    .logout-btn {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
-    
-    .button-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .button-container button {
-        width: 80%;
-        margin: 5px 0;
-    }
-    
-    /* Stack table on mobile */
-    .record-table thead {
-        display: none;
-    }
-    
-    .record-table, .record-table tbody, .record-table tr, .record-table td {
-        display: block;
-        width: 100%;
-    }
-    
-    .record-table tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-    }
-    
-    .record-table td {
-        text-align: right;
-        padding-left: 50%;
+      }
+      .header {
+        background-color: white;
+        color: #344767;
+        height: 50px;
         position: relative;
-        border-bottom: 1px solid #eee;
-    }
-    
-    .record-table td:before {
-        content: attr(data-label);
-        position: absolute;
+        padding: 10px 20px;
+        text-align: center;
+        position: fixed;
+        top: 0;
         left: 0;
-        width: 45%;
-        padding-left: 15px;
-        font-weight: bold;
-        text-align: left;
-    }
-}
+        width: 100%;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        height: 120px;
+        margin-right: 15px;
+      }
+      .header-center {
+        flex-grow: 1;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .nav a {
+        color: #192944;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 0 5px;
+      }
+
+      .nav a:hover {
+        background-color: #e4efff;
+      }
+      .logout-btn {
+        background-color: #e94e31;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        margin: 0px 40px;
+      }
+
+      .logout-btn a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .logout-btn:hover {
+        background-color: #777;
+      }
+
+      /* Mobile Menu */
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #192944;
+      }
+
+      /* Media Queries */
+      @media screen and (max-width: 1024px) {
+        .container {
+          width: 90%;
+        }
+
+        .logo {
+          height: 100px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .header {
+          height: auto;
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .header-left {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .logo {
+          height: 80px;
+        }
+
+        .header-center {
+          width: 100%;
+        }
+
+        .nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav a {
+          margin: 5px 0;
+          width: 100%;
+          text-align: center;
+        }
+
+        .container {
+          width: 95%;
+          margin-top: 150px;
+          padding: 15px;
+        }
+
+        .logout-btn {
+          margin: 10px 0;
+        }
+
+        /* Mobile-friendly table */
+        .record-table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .button-container button {
+          padding: 8px 15px;
+          margin: 5px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .container {
+          margin-top: 180px;
+          width: 100%;
+          border-radius: 0;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .nav.active {
+          display: flex;
+        }
+
+        .header-center {
+          order: 3;
+        }
+
+        .logout-btn {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+
+        .button-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .button-container button {
+          width: 80%;
+          margin: 5px 0;
+        }
+
+        /* Stack table on mobile */
+        .record-table thead {
+          display: none;
+        }
+
+        .record-table,
+        .record-table tbody,
+        .record-table tr,
+        .record-table td {
+          display: block;
+          width: 100%;
+        }
+
+        .record-table tr {
+          margin-bottom: 15px;
+          border: 1px solid #ddd;
+        }
+
+        .record-table td {
+          text-align: right;
+          padding-left: 50%;
+          position: relative;
+          border-bottom: 1px solid #eee;
+        }
+
+        .record-table td:before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 45%;
+          padding-left: 15px;
+          font-weight: bold;
+          text-align: left;
+        }
+      }
     </style>
-</head>
-<div class="header">
+  </head>
+  <div class="header">
     <div class="header-left">
-        <img src="/images/logoimage.png" alt="Company Logo" class="logo">
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <img src="/images/logoimage.png" alt="Company Logo" class="logo" />
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     </div>
     <div class="header-center">
-        <div class="nav" id="navMenu">
-            <a href="schedule.html">Schedule Interview</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="record.html">Evaluation Records</a>
-        </div>
+      <div class="nav" id="navMenu">
+        <a href="schedule.html">Schedule Interview</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="record.html">Evaluation Records</a>
+      </div>
     </div>
     <button class="logout-btn"><a href="../index.html">Logout</a></button>
-</div>
-<body>
+  </div>
+  <body>
     <div class="container">
-        <h1>Evaluation Records</h1>
-        <table class="record-table">
-            <thead>
-                <tr>
-                    <th>Interviewee Name</th>
-                    <th>Interview Date</th>
-                    <th>Interviewer</th>
-                    <th>L1 Decision</th>
-                    <th>L2 Scheduled</th>
-                    <th>Final Decision</th>
-                    <th>View PDF</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="recordTableBody"></tbody>
-        </table>
-        <div id="noRecordsMessage" class="no-records" style="display:none;">No records found.</div>
-        <div class="button-container">
-            <button onclick="loadRecords()">Load Records</button>
-        </div>
+      <h1>Evaluation Records</h1>
+      <table class="record-table">
+        <thead>
+          <tr>
+            <th>Interviewee Name</th>
+            <th>Interview Date</th>
+            <th>Interviewer</th>
+            <th>L1 Decision</th>
+            <th>L2 Scheduled</th>
+            <th>Final Decision</th>
+            <th>View PDF</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="recordTableBody"></tbody>
+      </table>
+      <div id="noRecordsMessage" class="no-records" style="display: none">
+        No records found.
+      </div>
+      <div class="button-container">
+        <button onclick="loadRecords()">Load Records</button>
+      </div>
     </div>
     <script>
-        async function deleteRecord(id) {
-            try {
-                const response = await fetch(`http://localhost:8080/api/evaluations/${id}`, { method: 'DELETE' });
-                if (response.ok) {
-                    alert('Record deleted successfully');
-                    loadRecords();
-                } else {
-                    alert('Error deleting record');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+      async function deleteRecord(id) {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/evaluations/${id}`,
+            { method: "DELETE" }
+          );
+          if (response.ok) {
+            alert("Record deleted successfully");
+            loadRecords();
+          } else {
+            alert("Error deleting record");
+          }
+        } catch (error) {
+          console.error("Error:", error);
         }
+      }
 
-        async function updateFinalDecision(id, newDecision) {
-            try {
-                const response = await fetch(`http://localhost:8080/api/evaluations/${id}/final-decision?finalDecision=${newDecision}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                if (response.ok) {
-                    alert('Final decision updated successfully');
-                    loadRecords();
-                } else {
-                    alert('Error updating decision');
-                }
-            } catch (error) {
-                console.error('Error:', error);
+      async function updateFinalDecision(id, newDecision) {
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/evaluations/${id}/final-decision?finalDecision=${newDecision}`,
+            {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
             }
+          );
+          if (response.ok) {
+            alert("Final decision updated successfully");
+            loadRecords();
+          } else {
+            alert("Error updating decision");
+          }
+        } catch (error) {
+          console.error("Error:", error);
         }
+      }
 
-        async function loadRecords() {
-            try {
-                const response = await fetch('http://localhost:8080/api/evaluations');
-                const records = await response.json();
-                const tableBody = document.getElementById('recordTableBody');
-                const noRecordsMessage = document.getElementById('noRecordsMessage');
-                
-                tableBody.innerHTML = '';
-                if (records.length === 0) {
-                    noRecordsMessage.style.display = 'block';
-                    return;
-                }
-                noRecordsMessage.style.display = 'none';
-    
-                records.forEach(record => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${record.intervieweeName}</td>
-                        <td>${record.interviewDate}</td>
-                        <td>${record.interviewer}</td>
-                        <td>${record.l1Decision}</td>
-                        <td>${record.l2Scheduled ? 'Yes' : 'No'}</td>
-                        <td>
-                             <select onchange="updateFinalDecision('${record.id}', this.value)">
-                                <option value="Pending" ${record.finalDecision === 'Pending' ? 'selected' : ''}>Pending</option>
-                                <option value="Selected" ${record.finalDecision === 'Selected' ? 'selected' : ''}>Selected</option>
-                                <option value="Not Selected" ${record.finalDecision === 'Not Selected' ? 'selected' : ''}>Not Selected</option>
-                            </select>
-                        </td>
-                        <td><a href="${record.intervieweeName.toLowerCase().replace(' ', '_')}_evaluation.pdf" target="_blank">View</a></td>
-                        <td>
-                            <button onclick="deleteRecord('${record.id}')">Delete</button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error:', error);
-            }
+      async function fetchEvaluationDetails(email) {
+    try {
+        const response = await fetch(
+            `http://localhost:8080/api/evaluations/by-email?intervieweeEmail=${email}`
+        );
+        const data = await response.json();
+
+        if (data.length === 0) {
+            alert("No evaluation details found.");
+            return;
         }
-    
-        window.onload = loadRecords;
+        
+        generatePDF(data, email);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+function generatePDF(data, email) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 10; // Y-coordinate for text placement
+
+    doc.setFontSize(14);
+    doc.text(`Evaluation Details for: ${email}`, 10, y);
+    y += 10;
+
+    data.forEach((e, index) => {
+        doc.setFontSize(12);
+        doc.text(`Interview #${index + 1}`, 10, y);
+        y += 6;
+        doc.text(`Interview Date: ${e.interviewTime}`, 10, y);
+        y += 6;
+        doc.text(`Interviewer: ${e.interviewerEmail}`, 10, y);
+        y += 6;
+        doc.text(`L1 Decision: ${e.l1Decision}`, 10, y);
+        y += 6;
+        doc.text(`Final Decision: ${e.finalDecision}`, 10, y);
+        y += 8;
+
+        doc.text("Skills Ratings:", 10, y);
+        y += 6;
+
+        e.parameters.forEach((p) => {
+            doc.text(`- ${p.skill}: ${p.rating} (${p.comments})`, 15, y);
+            y += 6;
+        });
+
+        y += 10; // Space between evaluations
+        if (y > 270) { // Avoid overflowing the page
+            doc.addPage();
+            y = 10;
+        }
+    });
+
+    doc.save(`${email}_evaluation.pdf`);
+}
+
+
+      async function loadRecords() {
+        try {
+          const response = await fetch("http://localhost:8080/api/evaluations");
+          const records = await response.json();
+          const tableBody = document.getElementById("recordTableBody");
+          tableBody.innerHTML = "";
+
+          records.forEach((record) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${record.intervieweeName}</td>
+                <td>${record.interviewTime}</td>
+                <td>${record.interviewerEmail}</td>
+                <td>${record.l1Decision}</td>
+                <td>${record.l2Scheduled ? "Yes" : "No"}</td>
+                <td>
+                    <select onchange="updateFinalDecision('${
+                      record.id
+                    }', this.value)">
+                        <option value="Pending" ${
+                          record.finalDecision === "Pending" ? "selected" : ""
+                        }>Pending</option>
+                        <option value="Selected" ${
+                          record.finalDecision === "Selected" ? "selected" : ""
+                        }>Selected</option>
+                        <option value="Not Selected" ${
+                          record.finalDecision === "Not Selected"
+                            ? "selected"
+                            : ""
+                        }>Not Selected</option>
+                    </select>
+                </td>
+                <td>
+                    <button onclick="fetchEvaluationDetails('${
+                      record.intervieweeEmail
+                    }')">Download PDF</button>
+                </td>
+                <td><button onclick="deleteRecord('${
+                  record.id
+                }')">Delete</button></td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      window.onload = loadRecords;
     </script>
-</body>
+  </body>
 </html>

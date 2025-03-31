@@ -34,6 +34,10 @@ public class EvaluationService {
         }).orElse(Optional.empty());
     }
 
+    public List<EvaluationModel> getEvaluationsByEmail(String intervieweeEmail) {
+        return evaluationRepository.findByIntervieweeEmail(intervieweeEmail);
+    }
+
     @Transactional
     public void deleteEvaluation(Long id) {
         evaluationRepository.deleteById(id);

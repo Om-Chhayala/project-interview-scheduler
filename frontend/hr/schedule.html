@@ -3,6 +3,7 @@
   <head>
     <title>HR - Schedule Interview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -385,7 +386,7 @@
           }
 
           const scheduleData = {
-            typeOfInterview: document.getElementById("level").value, 
+            typeOfInterview: document.getElementById("level").value,
             intervieweeEmail: intervieweeEmail.value,
             intervieweeName: intervieweeName.value,
             email: interviewer.value,
@@ -394,7 +395,6 @@
           };
 
           console.log(scheduleData);
-          
 
           fetch("http://localhost:8080/api/schedules", {
             method: "POST",
@@ -409,11 +409,26 @@
             .then((data) => {
               console.log("Success:", data);
               alert("Interview scheduled successfully!");
+              sendEmail(interviewer.value, interviewDateTime.value);
             })
             .catch((error) => {
               console.error("Error:", error);
               alert("An error occurred. Please try again.");
+              
             });
+        }
+
+        function sendEmail(email, dateTime) {
+          emailjs.init("-ERYtWewRPd26lbez");
+          emailjs
+            .send("service_bczd6pb", "template_cydxr7w", {
+              to_email: email,
+              message: `Your interview is scheduled on ${dateTime}`,
+            })
+            .then((response) =>
+              console.log("Email sent successfully!", response)
+            )
+            .catch((error) => console.error("Email sending failed:", error));
         }
 
         document
